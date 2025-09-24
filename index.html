@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>T4J Retirement Calculator — Project your future in seconds.</title>
+  <meta name="description" content="Fast, modern retirement calculator. Estimate balances from age, contributions, and returns—plan your future in minutes.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="T4J Retirement Calculator — Project your future in seconds.">
+  <meta property="og:description" content="Fast, modern retirement calculator. Estimate balances from age, contributions, and returns—plan your future in minutes.">
+  <meta property="og:image" content="assets/logo/PNG.0.1">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <!-- Updated logo path; keeps SVG fallback if not found -->
+    <img id="brandLogo" src="assets/logo/PNG.0.1" alt="AIToolsT4J logo" class="logo" onerror="fallbackLogo(this)"/>
+    <h1 class="visually-hidden">T4J Retirement Calculator</h1>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>T4J Retirement Calculator</h1>
+        <p class="hero-subtitle">See how small monthly contributions grow over time—no sign-up.</p>
+        <button class="cta-button" onclick="scrollToCalculator()">Try the Calculator</button>
+      </div>
+
+      <!-- Two-column area: Inputs (left) + Results panel (right) -->
+      <div class="calc-grid" id="calculator">
+        <!-- LEFT: Inputs-only card -->
+        <div class="calculator-card" role="region" aria-label="Retirement calculator">
+          <div class="calculator-header">
+            <h2>Retirement Calculator</h2>
+            <button class="help-button" onclick="toggleKeyboardHelp()" aria-label="Show keyboard shortcuts">?</button>
+          </div>
+
+          <div class="calculator-inputs" aria-label="Retirement inputs">
+            <div class="input-group">
+              <label for="currentAge">Current Age</label>
+              <input type="number" id="currentAge" placeholder="e.g., 30" min="0"/>
+            </div>
+            <div class="input-group">
+              <label for="retirementAge">Retirement Age</label>
+              <input type="number" id="retirementAge" value="67" min="18" max="100"/>
+            </div>
+            <div class="input-group">
+              <label for="currentBalance">Current Balance ($)</label>
+              <input type="number" id="currentBalance" value="0" min="0" step="100"/>
+            </div>
+            <div class="input-group">
+              <label for="monthlyContribution">Monthly Contribution ($)</label>
+              <input type="number" id="monthlyContribution" value="300" min="0" step="1"/>
+            </div>
+            <div class="input-group">
+              <label for="annualReturn">Annual Return (%)</label>
+              <input type="number" id="annualReturn" value="7" min="0" max="50" step="0.1"/>
+            </div>
+          </div>
+
+          <!-- Small result strip inside the card -->
+          <div class="calculator-screen" aria-live="polite">
+            <div class="expression-line" aria-hidden="true">Projected Balance at Retirement</div>
+            <div class="result-line" id="resultLine">$0</div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Results + CTAs (matches your requests) -->
+        <aside class="results-panel" aria-label="Your results and actions">
+          <h3 class="results-title">Your Results</h3>
+          <div class="results-balance" id="resultBig">$0</div>
+
+          <ul class="results-list">
+            <li class="results-item">
+              <div class="item-text">
+                <strong>Want to make a plan to meet your retirement goals?</strong>
+              </div>
+              <a class="item-btn" href="https://github.com/Marc13/AIMaker-Calculator-Web" rel="noopener">Work With a Pro</a>
+            </li>
+
+            <li class="results-item">
+              <div class="item-text">
+                <strong>Do you want learn more how to reach your goal?</strong>
+              </div>
+              <!-- Link to FAQ resource in your project -->
+              <a class="item-btn secondary" href="FAQ" rel="noopener">Find Out</a>
+            </li>
+
+            <!-- Removed the “Learn for Free” section per request -->
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Explainer Video -->
+    <section class="video-section" aria-labelledby="videoTitle">
+      <div class="video-container">
+        <iframe
+          src="https://www.youtube.com/embed/TnB4uGYuN48"
+          title="9 Reasons Why Retirement Planning is Important"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+        <p id="videoTitle" class="video-caption">9 Reasons Why Retirement Planning is Important</p>
+      </div>
+
+      <aside class="video-aside" aria-label="Quick takeaways">
+        <p>Small, consistent contributions today beat big, late contributions tomorrow.</p>
+        <p>What surprising effect does compounding produce in just 10 years? (Hint: it’s bigger than most expect.)</p>
+        <p>Discover one tiny habit that can dramatically change your retirement outcome.</p>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p class="copyright">© 2025 AIToolsT4J — All rights reserved.</p>
+      <p class="contact"><a href="https://github.com/Marc13/AIMaker-Calculator-Web">Contact us</a></p>
+      <div class="disclaimer" role="note" aria-label="Financial disclaimer">
+        <p>This tool provides educational estimates only and is not financial advice. Investment returns are not guaranteed. Consult a licensed professional for personalized guidance.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Keyboard Help (trimmed—no calculate button exists) -->
+  <div class="keyboard-help" id="keyboardHelp" style="display:none;">
+    <div class="help-content" role="dialog" aria-modal="true" aria-label="Keyboard shortcuts">
+      <h3>Keyboard Shortcuts</h3>
+      <ul>
+        <li><kbd>Enter</kbd> Recalculate</li>
+        <li><kbd>Esc</kbd> Clear inputs</li>
+      </ul>
+      <button class="close-help" onclick="toggleKeyboardHelp()">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+

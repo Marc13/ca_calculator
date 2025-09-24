@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>FAQ - T4J Retirement Calculator</title>
+    <meta name="description" content="Frequently asked questions about the T4J Retirement Calculator and retirement planning guidance.">
+    <link rel="stylesheet" href="style.css"/>
+    <style>
+        .faq-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .faq-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .faq-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-2));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .faq-image {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            margin: 2rem auto;
+            display: block;
+            background: var(--card);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        .back-link:hover {
+            color: var(--primary-2);
+            text-decoration: underline;
+        }
+        .image-status {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: var(--muted);
+            border-radius: var(--radius);
+            color: var(--fg-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="assets/logo/PNG-01.png" alt="AIToolsT4J logo" class="logo" onerror="fallbackLogo(this)"/>
+        <h1 class="visually-hidden">T4J Retirement Calculator FAQ</h1>
+    </header>
+
+    <main>
+        <div class="faq-container">
+            <a href="index.html" class="back-link">← Back to Calculator</a>
+            
+            <div class="faq-header">
+                <h1>Frequently Asked Questions</h1>
+                <p class="hero-subtitle">About the T4J Retirement Calculator</p>
+            </div>
+
+            <!-- FAQ Image Display with cache-busting -->
+            <img id="faqImage" 
+                 src="" 
+                 alt="Frequently Asked Questions about the T4J Retirement Calculator" 
+                 class="faq-image"
+                 onload="showImageSuccess()"
+                 onerror="handleImageError()">
+
+            <div id="imageStatus" class="image-status">Loading FAQ content...</div>
+            
+            <!-- Manual refresh button -->
+            <div id="refreshButton" class="image-status" style="display: none;">
+                <button onclick="retryImageLoad()" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600;">
+                    🔄 Retry Loading Image
+                </button>
+            </div>
+
+            <!-- Fallback content if image doesn't load -->
+            <div id="fallbackContent" style="display: none;">
+                <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Frequently Asked Questions</h3>
+                    <div style="color: var(--fg-muted); line-height: 1.6;">
+                        <p><strong>Q: What does the T4J Retirement Calculator do?</strong></p>
+                        <p>A: It helps you estimate your retirement savings by calculating compound growth based on your current balance, monthly contributions, and expected annual returns.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Q: How accurate are the calculations?</strong></p>
+                        <p>A: The calculator provides estimates based on the inputs you provide. Actual results may vary due to market conditions and other factors.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Q: What's a good monthly contribution amount?</strong></p>
+                        <p>A: Financial experts often recommend saving 15% of your income for retirement, though the right amount depends on your personal situation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="disclaimer" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                <p><strong>Disclaimer:</strong> This tool provides educational estimates only and is not financial advice. Investment returns are not guaranteed. Consult a licensed professional for personalized guidance.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Logo fallback function
+        function fallbackLogo(imgEl){
+            const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+            svg.setAttribute('viewBox','0 0 120 40'); 
+            svg.setAttribute('class','logo');
+            svg.innerHTML = `
+                <defs><linearGradient id="g" x1="0" x2="1">
+                <stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient></defs>
+                <rect x="0" y="0" width="120" height="40" rx="8" fill="#111117" stroke="#232333"/>
+                <text x="60" y="26" text-anchor="middle" font-size="20" font-weight="800" fill="url(#g)">T4J</text>
+            `;
+            imgEl.replaceWith(svg);
+        }
+
+        // Show success message when image loads
+        function showImageSuccess() {
+            const statusDiv = document.getElementById('imageStatus');
+            statusDiv.textContent = 'FAQ content loaded successfully';
+            statusDiv.style.background = 'var(--primary)';
+            statusDiv.style.color = 'white';
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 2000);
+        }
+
+        // Handle FAQ image error and show fallback
+        function handleImageError() {
+            const statusDiv = document.getElementById('imageStatus');
+            const refreshButton = document.getElementById('refreshButton');
+            const img = document.getElementById('faqImage');
+            const fallback = document.getElementById('fallbackContent');
+            
+            // Hide the broken image and status
+            img.style.display = 'none';
+            statusDiv.style.display = 'none';
+            
+            // Show refresh button and fallback content
+            refreshButton.style.display = 'block';
+            fallback.style.display = 'block';
+            
+            console.log('Image failed to load, showing fallback content');
+            console.log('Attempted path:', img.src);
+            console.log('Current URL:', window.location.href);
+        }
+
+        // Manual retry function
+        function retryImageLoad() {
+            const img = document.getElementById('faqImage');
+            const statusDiv = document.getElementById('imageStatus');
+            const refreshButton = document.getElementById('refreshButton');
+            const fallback = document.getElementById('fallbackContent');
+            
+            // Reset display
+            img.style.display = 'block';
+            statusDiv.style.display = 'block';
+            statusDiv.textContent = 'Retrying image load...';
+            refreshButton.style.display = 'none';
+            fallback.style.display = 'none';
+            
+            // Force reload
+            loadFAQImage();
+        }
+
+        // Force fresh image load with cache-busting
+        function loadFAQImage() {
+            const img = document.getElementById('faqImage');
+            const timestamp = new Date().getTime();
+            const randomId = Math.random().toString(36).substr(2, 9);
+            
+            // Try multiple paths with cache-busting
+            const imagePaths = [
+                `assets/FAQ.png?v=${timestamp}&r=${randomId}`,
+                `./assets/FAQ.png?v=${timestamp}&r=${randomId}`,
+                `assets/FAQ.png?cache=${timestamp}`,
+                `assets/FAQ.png`
+            ];
+            
+            let currentAttempt = 0;
+            
+            function tryNextPath() {
+                if (currentAttempt >= imagePaths.length) {
+                    console.log('All image paths failed, showing fallback');
+                    handleImageError();
+                    return;
+                }
+                
+                const currentPath = imagePaths[currentAttempt];
+                console.log(`Attempting to load: ${currentPath}`);
+                
+                // Reset image events
+                img.onload = function() {
+                    console.log(`Image loaded successfully from: ${currentPath}`);
+                    showImageSuccess();
+                };
+                
+                img.onerror = function() {
+                    console.log(`Failed to load: ${currentPath}`);
+                    currentAttempt++;
+                    setTimeout(tryNextPath, 100); // Small delay before next attempt
+                };
+                
+                img.src = currentPath;
+            }
+            
+            // Start loading attempts
+            tryNextPath();
+            
+            // Set a timeout as final fallback
+            setTimeout(() => {
+                if (!img.complete || img.naturalHeight === 0) {
+                    console.log('Image loading timed out, showing fallback');
+                    handleImageError();
+                }
+            }, 8000);
+        }
+
+        // Enhanced page load handler
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('FAQ page loaded');
+            console.log('Current protocol:', window.location.protocol);
+            console.log('Current URL:', window.location.href);
+            
+            // Clear any existing image source and reload
+            const img = document.getElementById('faqImage');
+            img.src = '';
+            
+            // Start fresh image loading
+            setTimeout(loadFAQImage, 100);
+        });
+
+        // Handle browser back/forward navigation
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                console.log('Page restored from cache, reloading image');
+                setTimeout(loadFAQImage, 100);
+            }
+        });
+
+        // Handle visibility change (when user switches tabs)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                const img = document.getElementById('faqImage');
+                if (!img.complete || img.naturalHeight === 0) {
+                    console.log('Page became visible, retrying image load');
+                    setTimeout(loadFAQImage, 200);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
